@@ -4,6 +4,7 @@ import com.mnt.coffeeshop.external.PremiumCoffeeMachine;
 import com.mnt.coffeeshop.serviceinterface.CoffeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +18,7 @@ public class CoffeeController {
     private CoffeeService coffeeService;
 
     @Autowired
+    @Lazy
     private PremiumCoffeeMachine premiumCoffeeMachine;
 
     @GetMapping("/order")
