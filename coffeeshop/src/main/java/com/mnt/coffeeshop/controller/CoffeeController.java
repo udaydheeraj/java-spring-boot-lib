@@ -13,9 +13,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class CoffeeController {
 
-    @Autowired
-    @Qualifier("espressoCoffeeService")
-    private CoffeeService coffeeService;
+
+   // @Autowired
+  //  @Qualifier("espressoCoffeeService")
+    private  CoffeeService coffeeService;
+
+    public CoffeeController(@Qualifier("espressoCoffeeService")
+                            CoffeeService coffeeService)
+    {
+        this.coffeeService = coffeeService;
+    }
+
 
     @Autowired
     @Lazy
