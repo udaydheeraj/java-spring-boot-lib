@@ -23,8 +23,7 @@ public class Student {
     @Column(name = "grade_level")
     private String gradeLevel;
 
-    public Student(int studentId, String firstName, String lastName, int age, String gradeLevel) {
-        this.studentId = studentId;
+    public Student( String firstName, String lastName, int age, String gradeLevel) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
