@@ -2,8 +2,11 @@ package com.mnt.schoolapp.repository;
 
 import com.mnt.schoolapp.entity.Student;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class StudentDAO {
@@ -19,4 +22,16 @@ public class StudentDAO {
     {
         entityManager.persist(student);
     }
+
+    public List<Student> findAll()
+    {
+       TypedQuery<Student> query = entityManager.createQuery("FROM Student", Student.class);
+       return query.getResultList();
+    }
+
+    public Student findById(int id)
+    {
+        return entityManager.find(Student.class, id);
+    }
+
 }
