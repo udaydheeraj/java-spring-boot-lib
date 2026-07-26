@@ -34,4 +34,19 @@ public class StudentDAO {
         return entityManager.find(Student.class, id);
     }
 
+    @Transactional
+    public void update(Student student)
+    {
+        entityManager.merge(student);
+    }
+
+    @Transactional
+    public void deleteById(int id)
+    {
+        Student student = entityManager.find(Student.class, id);
+        if(student != null) {
+        entityManager.remove(student);
+        }
+    }
+
 }

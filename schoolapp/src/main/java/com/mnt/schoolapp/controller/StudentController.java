@@ -37,4 +37,20 @@ public class StudentController {
     {
         return studentService.findById(id);
     }
+
+    @PutMapping("/{id}")
+    public String updateStudent(@PathVariable int id, Student student)
+    {
+        student.setStudentId(id);
+        studentService.updateStudent(student);
+
+        return "Student updated successfully.";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteById(int id)
+    {
+        studentService.deleteById(id);
+        return "Student deleted successfully.";
+    }
 }

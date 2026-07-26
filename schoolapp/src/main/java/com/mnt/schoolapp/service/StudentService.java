@@ -32,4 +32,14 @@ public class StudentService {
         return studentDAO.findById(id);
     }
 
+    public void updateStudent(Student student)
+    {
+        studentDAO.update(student);
+    }
+
+    public void deleteById(int id)
+    {
+        studentDAO.deleteById(id);
+    }
+
 }
