@@ -1,7 +1,6 @@
-package com.mnt.employeeCRUD.entity;
+package com.mnt.employee.entity;
 
 import jakarta.persistence.*;
-import org.yaml.snakeyaml.events.Event;
 
 @Entity
 @Table(name = "employee")
@@ -25,9 +24,14 @@ public class Employee {
     private String department;
 
     @Column(name = "salary")
-    private long salary;
+    private double salary;
 
-    public Employee(String firstName, String lastName, String email, String department, long salary) {
+    public Employee()
+    {
+
+    }
+
+    public Employee(String firstName, String lastName, String email, String department, double salary) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -75,7 +79,7 @@ public class Employee {
         this.department = department;
     }
 
-    public long getSalary() {
+    public double getSalary() {
         return salary;
     }
 
