@@ -25,7 +25,8 @@ public class StudentDAO {
 
     public List<Student> findAll()
     {
-       TypedQuery<Student> query = entityManager.createQuery("FROM Student", Student.class);
+       TypedQuery<Student> query = entityManager.createQuery("FROM Student WHERE gradeLevel = :grade ", Student.class);
+       query.setParameter("grade", "12th");
        return query.getResultList();
     }
 
