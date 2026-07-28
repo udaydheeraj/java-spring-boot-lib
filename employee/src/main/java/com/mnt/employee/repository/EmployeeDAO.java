@@ -15,4 +15,6 @@ public interface EmployeeDAO {
     public void updateEmployee(Employee employee);
 
     void deleteEmployee(Employee employee);
+
+    List<Employee> findEmployeeByDepartment(String department);
 }

@@ -34,6 +34,13 @@ public class EmployeeController {
         return employeeService.findEmployeeById(id);
     }
 
+    @GetMapping("/Department/{department}")
+    public List<Employee> getEmployeeByDepartment(@PathVariable String department)
+    {
+        return employeeService.getEmployeeByDepartment(department);
+    }
+
+
     /*@PutMapping("/{id}")
     public void updateEmployee(@PathVariable int id)
     {
@@ -52,6 +59,9 @@ public class EmployeeController {
         System.out.println("employee deleted Successfully");
         return "<h1>employee deleted Successfully :" + id + "<h1> ";
     }
+
+
+
 
 
 

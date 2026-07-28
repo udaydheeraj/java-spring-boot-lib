@@ -39,4 +39,9 @@ public class EmployeeService {
     public void deleteEmployee(Employee employee) {
         employeeDAOimpl.deleteEmployee(employee);
     }
+
+    public List<Employee> getEmployeeByDepartment(String department)
+    {
+        return employeeDAOimpl.findEmployeeByDepartment(department);
+    }
 }
