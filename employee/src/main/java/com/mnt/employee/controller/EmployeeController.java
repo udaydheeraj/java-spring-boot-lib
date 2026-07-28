@@ -50,7 +50,7 @@ public class EmployeeController {
         Employee employee = employeeService.findEmployeeById(id);
         employeeService.deleteEmployee(employee);
         System.out.println("employee deleted Successfully");
-        return "<h1>employee deleted Successfully<h1> ";
+        return "<h1>employee deleted Successfully :" + id + "<h1> ";
     }
 
 

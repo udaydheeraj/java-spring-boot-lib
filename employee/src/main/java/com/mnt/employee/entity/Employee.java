@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "employee")
+@NamedQuery(
+        name = "Employee.findAll",
+        query = "From Employee"
+)
 public class Employee {
 
     @Id
