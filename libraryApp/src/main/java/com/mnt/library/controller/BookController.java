@@ -1,5 +1,6 @@
 package com.mnt.library.controller;
 
+import com.mnt.library.dto.BookDetailsDTO;
 import com.mnt.library.entity.Book;
 import com.mnt.library.entity.Category;
 import com.mnt.library.service.BookService;
@@ -62,9 +63,9 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    public void updateBook(Book book,@PathVariable Integer id)
+    public void updateBook(@PathVariable Integer id)
     {
-        bookService.updateBook(book,id);
+        bookService.updateBook(id);
     }
 
     @DeleteMapping("/{id}")
@@ -72,5 +73,7 @@ public class BookController {
     {
         bookService.deleteById(id);
     }
+
+
 
 }

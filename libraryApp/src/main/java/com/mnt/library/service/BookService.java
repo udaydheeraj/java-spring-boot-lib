@@ -1,5 +1,6 @@
 package com.mnt.library.service;
 
+import com.mnt.library.dto.BookDetailsDTO;
 import com.mnt.library.entity.Book;
 import com.mnt.library.entity.Category;
 
@@ -12,7 +13,7 @@ public interface BookService {
 
     public List<Book> findAll();
 
-    public void updateBook(Book book, Integer id);
+    public void updateBook(Integer id);
 
     public void deleteById(Integer id);
 
@@ -23,6 +24,10 @@ public interface BookService {
     public List<Book> findBooksByPublisher(Integer pId);
 
     public List<Book> findBooksByPublisherCity(String cname);
+
+    List<Book> findBookDetailsWithCategoryAndPublisherById(Integer cpid);
+
+
 
 
 

@@ -4,6 +4,7 @@ import com.mnt.library.entity.Category;
 import com.mnt.library.entity.Publisher;
 import com.mnt.library.repository.CategoryRepository;
 import com.mnt.library.repository.CategoryRepositoryImpl;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,14 +32,16 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     @Override
+    @Transactional
     public void updateCategory(Category category, Integer id) {
-        category.setCategoryId(id);
+        //category.setCategoryId(id);
         //category.setDescription(
         categoryRepository.update(category);
 
     }
 
     @Override
+    @Transactional
     public void deleteById(Integer id) {
         Category category = categoryRepository.findById(id);
         categoryRepository.deleteById(category);

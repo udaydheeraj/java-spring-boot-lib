@@ -1,5 +1,6 @@
 package com.mnt.library.repository;
 
+import com.mnt.library.dto.BookDetailsDTO;
 import com.mnt.library.entity.Book;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -43,6 +44,12 @@ public class BookRepositoryImpl implements BookRepository{
                 .setParameter("pid",cname).getResultList();
     }
 
+    @Override
+    public List<Book> findBookDetailsWithCategoryAndPublisherById(Integer cpid) {
+        String jpql = "SELECT b FROM Book b JOIN FETCH b.category JOIN FETCH b.publisher WHERE b.bookId = :id";
+        return entityManager.createQuery(jpql,Book.class)
+                .setParameter("id",cpid).getResultList();
+    }
 
 
 
@@ -61,13 +68,14 @@ public class BookRepositoryImpl implements BookRepository{
     @Override
     @Transactional
     public void update(Book book) {
+        entityManager.merge(book);
 
     }
 
     @Override
     @Transactional
     public void deleteById(Book book) {
-
+        entityManager.remove(book);
     }
 
 
@@ -75,6 +83,6 @@ public class BookRepositoryImpl implements BookRepository{
     @Override
     @Transactional
     public void save(Book book) {
-
+      entityManager.persist(book);
     }
 }

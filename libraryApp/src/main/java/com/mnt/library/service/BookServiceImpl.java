@@ -1,5 +1,6 @@
 package com.mnt.library.service;
 
+import com.mnt.library.dto.BookDetailsDTO;
 import com.mnt.library.entity.Book;
 import com.mnt.library.entity.Category;
 import com.mnt.library.repository.BookRepository;
@@ -35,8 +36,9 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void updateBook(Book book,Integer id) {
-       // book.setBookId(id);
+    @Transactional
+    public void updateBook(Integer id) {
+        Book book = bookRepository.findById(id);
         //book.setAuthor(
        // bookRepository.update(book);
     }
@@ -44,7 +46,8 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public void deleteById(Integer id) {
-
+       Book book = bookRepository.findById(id);
+       bookRepository.deleteById(book);
     }
 
     @Override
@@ -67,6 +70,12 @@ public class BookServiceImpl implements BookService {
         return bookRepository.findBooksByPublisherCity(cname);
 
     }
+
+    @Override
+    public List<Book> findBookDetailsWithCategoryAndPublisherById(Integer cpid) {
+        return bookRepository.findBookDetailsWithCategoryAndPublisherById(cpid);
+    }
+
 
 
 }

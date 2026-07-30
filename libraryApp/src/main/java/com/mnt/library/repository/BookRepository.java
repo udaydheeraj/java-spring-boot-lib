@@ -1,5 +1,6 @@
 package com.mnt.library.repository;
 
+import com.mnt.library.dto.BookDetailsDTO;
 import com.mnt.library.entity.Book;
 import com.mnt.library.entity.Category;
 
@@ -25,6 +26,9 @@ public interface BookRepository {
     List<Book> findBooksByPublisher(Integer pId);
 
     List<Book> findBooksByPublisherCity(String cname);
+
+    List<Book> findBookDetailsWithCategoryAndPublisherById(Integer cpid);
+
 
 
 }
