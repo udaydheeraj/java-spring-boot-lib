@@ -19,7 +19,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/all")
+    @GetMapping()
     List<Product> getAllProducts()
     {
         return productService.findAll();
@@ -37,5 +37,12 @@ public class ProductController {
         return productService.findByQuantityGreaterThan(id);
     }
 
+
+
+    @GetMapping("productName/{keyword}")
+    List<Product> findByProductNameContaining(@PathVariable String keyword)
+    {
+        return productService.findByProductNameContainingIgnoreCase(keyword);
+    }
 
 }
