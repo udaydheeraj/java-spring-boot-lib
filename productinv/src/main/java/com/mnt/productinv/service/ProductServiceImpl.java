@@ -29,8 +29,40 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product findByProductId(int id) {
-
+       // System.out.println("findbyid : in service triggered");
         return productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
     }
+
+    @Override
+    public void delete(Product product) {
+        productRepository.delete(product);
+    }
+
+    @Override
+    public List<Product> findByBrand(String brand) {
+        return productRepository.findByBrand(brand);
+    }
+
+    @Override
+    public List<Product> findByCategory(String category) {
+        return productRepository.findByCategory(category);
+    }
+
+    @Override
+    public List<Product> findByPriceLessThan(Double maxPrice) {
+        return productRepository.findByPriceLessThan(maxPrice);
+    }
+
+    @Override
+    public List<Product> findByProductNameContainingIgnoreCase(String keyword) {
+        return productRepository.findByProductNameContainingIgnoreCase(keyword);
+    }
+
+    @Override
+    public List<Product> findByQuantityGreaterThan(Integer minQuantity) {
+        return productRepository.findByQuantityGreaterThan(minQuantity);
+    }
+
+
 }

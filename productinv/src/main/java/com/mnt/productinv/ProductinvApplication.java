@@ -34,7 +34,9 @@ public class ProductinvApplication {
 	{
 		return runner -> {
 
-			save(productService);
+			//save(productService);
+			//update(productService, 10);
+			//delete(productService,10);
 
 		};
 	}
@@ -51,5 +53,22 @@ public class ProductinvApplication {
 
 		productService.save(product);
 	}
+	private void update(ProductService productService, int id)
+	{
+		Product product = productService.findByProductId(id);
+		product.setPrice(1000.00);
+		product.setCategory("Footwear");
+		product.setProductName("Walking shoes");
+
+		productService.save(product);
+	}
+
+	private void delete(ProductService productService, int id)
+	{
+		Product product = productService.findByProductId(id);
+		productService.delete(product);
+	}
+
+
 
 }

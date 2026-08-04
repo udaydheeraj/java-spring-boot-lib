@@ -25,9 +25,17 @@ public class ProductController {
         return productService.findAll();
     }
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     Product getProductById(@PathVariable int id)
     {
        return productService.findByProductId(id);
     }
+
+    @GetMapping("quantity/{id}")
+    List<Product> getByQuantityGreaterThan(@PathVariable int id)
+    {
+        return productService.findByQuantityGreaterThan(id);
+    }
+
+
 }

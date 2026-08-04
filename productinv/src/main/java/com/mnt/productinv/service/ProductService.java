@@ -9,4 +9,16 @@ public interface ProductService {
     void save(Product product);
 
     Product findByProductId(int id);
+
+     void delete(Product product);
+
+    List<Product> findByBrand(String brand);
+
+    List<Product> findByCategory(String category);
+
+    List<Product> findByPriceLessThan(Double maxPrice);
+
+    List<Product> findByProductNameContainingIgnoreCase(String keyword);
+
+    List<Product> findByQuantityGreaterThan(Integer minQuantity);
 }
