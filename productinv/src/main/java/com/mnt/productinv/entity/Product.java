@@ -1,10 +1,10 @@
 package com.mnt.productinv.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -16,26 +16,30 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
-    private int productId;
+    private Integer productId;
 
     @Column(name = "product_name")
     private String productName;
 
     private String brand;
 
-    private String category;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id")
+    private Category category;
 
-    private double price;
+    private Double price;
 
-    private int quantity;
+    private Integer quantity;
 
     @Column(name = "manufacture_date")
-    private Date manufactureDate;
+    private LocalDate manufactureDate;
 
-    @Column(name = "expiry_date")
-    private Date expiryDate;
-
-
-
-
+    public Product(String productName, String brand, Category category, Double price, Integer quantity, LocalDate manufactureDate) {
+        this.productName = productName;
+        this.brand = brand;
+        this.category = category;
+        this.price = price;
+        this.quantity = quantity;
+        this.manufactureDate = manufactureDate;
+    }
 }

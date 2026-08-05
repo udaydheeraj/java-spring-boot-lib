@@ -1,11 +1,11 @@
-package com.mnt.productinv.service;
+package com.mnt.productinv.serviceimpl;
 
 import com.mnt.productinv.entity.Product;
 import com.mnt.productinv.repository.ProductRepository;
+import com.mnt.productinv.service.ProductService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
