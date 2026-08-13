@@ -15,6 +15,8 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 @EnableJpaRepositories(
@@ -48,6 +50,14 @@ public class ProductDbConfig {
         factory.setPackagesToScan("com.mnt.multiDB1.entity");
         factory.setJpaVendorAdapter(vendorAdapter);
         factory.setPersistenceUnitName("product");
+
+        Map<String, Object> properties = new HashMap<>();
+
+        properties.put("hibernate.hbm2ddl.auto", "update");
+        properties.put("hibernate.show_sql", true);
+        properties.put("hibernate.format_sql", true);
+
+        factory.setJpaPropertyMap(properties);
 
         return factory;
     }
