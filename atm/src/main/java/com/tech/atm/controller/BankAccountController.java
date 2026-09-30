@@ -9,13 +9,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-
 @Data
+@RequestMapping("/api/accounts")
 public class BankAccountController {
 
     private final BankAccountService bankAccountService;
@@ -23,14 +24,14 @@ public class BankAccountController {
         this.bankAccountService = bankAccountService;
     }
 
-    @PostMapping("/api/accounts")
+    @PostMapping
     public ResponseEntity<BankAccountResponse>
     createBankAccount( @RequestBody BankAccountRequest bankAccountRequest) {
         BankAccountResponse bankAccountResponse = bankAccountService.createBankAccount(bankAccountRequest);
         return new ResponseEntity<>(bankAccountResponse, HttpStatus.CREATED);
     }
 
-    @GetMapping("/api/accounts/{accountNumber}")
+    @GetMapping("/{accountNumber}")
     public ResponseEntity<BankAccountResponse>
     getBankAccount(@PathVariable String accountNumber) {
         BankAccountResponse bankAccountResponse = bankAccountService.getBankAccountByAccountNumber(accountNumber);
@@ -38,12 +39,12 @@ public class BankAccountController {
     }
 
 
-    @GetMapping("/api/accounts")
+    @GetMapping
     public List<BankAccountResponse> getAllBankAccounts() {
         return bankAccountService.getBankAccounts();
     }
 
-    @PutMapping("/api/accounts/{accountNumber}")
+    @PutMapping("/{accountNumber}")
     public ResponseEntity<BankAccountResponse>
     updateBankAccount(@PathVariable String accountNumber,@RequestBody BankAccountRequest bankAccountRequest) {
         BankAccountResponse updatedbankAccountResponse = bankAccountService.updateBankAccount(accountNumber,bankAccountRequest);
@@ -51,7 +52,7 @@ public class BankAccountController {
         return new ResponseEntity<>(updatedbankAccountResponse, HttpStatus.OK);
     }
 
-    @DeleteMapping("/api/accounts/{accountNumber}")
+    @DeleteMapping("/{accountNumber}")
     public ResponseEntity<Map<String,String>> deleteBankAccount(@PathVariable String accountNumber) {
         bankAccountService.deleteBankAccount(accountNumber);
         // Create a structured confirmation message
@@ -63,6 +64,12 @@ public class BankAccountController {
 
         return ResponseEntity.ok(response); // Returns HTTP 200 OK with JSON body
 
+    }
+
+    @GetMapping("/{accountNumber}/balance")
+    public BigDecimal getAccountBalance(@PathVariable String accountNumber) {
+        BankAccountResponse response = bankAccountService.getAccountBalance(accountNumber);
+        return response.getBalance();
     }
 
 

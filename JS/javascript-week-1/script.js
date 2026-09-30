@@ -7,8 +7,10 @@ const active = true;
 
 const hra = basicSalary * 0.20;
 const da = basicSalary * 0.10;
+const pf = basicSalary * 0.12;
 
 const grossSalary = basicSalary + hra + da;
+const netSalary = grossSalary - pf;
 
 const bonusEligible =
     experience >= 3 && active === true;
@@ -21,3 +23,4 @@ console.log("HRA:", hra);
 console.log("DA:", da);
 console.log("Gross Salary:", grossSalary);
 console.log("Bonus Eligible:", bonusEligible);
+console.log("Net Salary:", netSalary)

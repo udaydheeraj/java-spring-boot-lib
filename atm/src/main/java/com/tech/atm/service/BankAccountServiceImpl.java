@@ -3,11 +3,14 @@ package com.tech.atm.service;
 import com.tech.atm.dto.BankAccountRequest;
 import com.tech.atm.dto.BankAccountResponse;
 import com.tech.atm.entity.BankAccount;
+import com.tech.atm.exception.BankAccountNotFoundException;
 import com.tech.atm.repository.BankAccountRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BankAccountServiceImpl implements BankAccountService {
@@ -31,7 +34,6 @@ public class BankAccountServiceImpl implements BankAccountService {
 
         BankAccount savedAccount = bankAccountRepository.save(entity);
        return BankAccountResponse.builder()
-               .id(savedAccount.getId())
                .accountNumber(savedAccount.getAccountNumber())
                .accountHolderName(savedAccount.getAccountHolderName())
                .balance(savedAccount.getBalance())
@@ -42,7 +44,10 @@ public class BankAccountServiceImpl implements BankAccountService {
 
     @Override
     public BankAccount getAccountByAccountNumber(String accountNumber) {
-        return bankAccountRepository.findByAccountNumber(accountNumber);
+
+        return Optional.ofNullable(bankAccountRepository.findByAccountNumber(accountNumber)).orElseThrow(
+                () -> new BankAccountNotFoundException("Bank account nor found" + accountNumber)
+        );
 
     }
 
@@ -50,7 +55,6 @@ public class BankAccountServiceImpl implements BankAccountService {
     public List<BankAccountResponse> getBankAccounts() {
         return bankAccountRepository.findAll().stream()
                 .map(bankAccount -> BankAccountResponse.builder()
-                        .id(bankAccount.getId())
                         .accountNumber(bankAccount.getAccountNumber())
                         .accountHolderName(bankAccount.getAccountHolderName())
                         .balance(bankAccount.getBalance())
@@ -69,7 +73,6 @@ public class BankAccountServiceImpl implements BankAccountService {
 
        BankAccount savedAccount =  bankAccountRepository.save(existingAccount);
        return BankAccountResponse.builder()
-               .id(savedAccount.getId())
                .accountNumber(savedAccount.getAccountNumber())
                .accountHolderName(savedAccount.getAccountHolderName())
                .balance(savedAccount.getBalance())
@@ -89,9 +92,23 @@ public class BankAccountServiceImpl implements BankAccountService {
         BankAccount bankAccount = bankAccountRepository.findByAccountNumber(accountNumber);
         return BankAccountResponse.builder()
                 .accountNumber(bankAccount.getAccountNumber())
-                .id(bankAccount.getId())
                 .accountHolderName(bankAccount.getAccountHolderName())
                 .status(bankAccount.getStatus())
+                .build();
+    }
+
+    @Override
+    public BankAccountResponse getAccountBalance(String accountNumber) {
+       BankAccount entity =  bankAccountRepository.findByAccountNumber(accountNumber);
+         if(!entity.getStatus().equals(BankAccount.AccountStatus.ACTIVE)){
+             throw new RuntimeException("Account is not active.");
+         }
+
+        return BankAccountResponse.builder()
+                .balance(entity.getBalance())
+                .status(entity.getStatus())
+                .accountNumber(entity.getAccountNumber())
+                .accountHolderName(entity.getAccountHolderName())
                 .build();
     }
 

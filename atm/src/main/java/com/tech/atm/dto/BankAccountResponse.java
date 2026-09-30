@@ -14,7 +14,6 @@ import java.math.BigDecimal;
 @Builder
 public class BankAccountResponse {
 
-    private Integer id;
     private String accountNumber;
     private String accountHolderName;
     private BigDecimal balance;

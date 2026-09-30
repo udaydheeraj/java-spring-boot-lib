@@ -4,6 +4,7 @@ import com.tech.atm.dto.BankAccountRequest;
 import com.tech.atm.dto.BankAccountResponse;
 import com.tech.atm.entity.BankAccount;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface BankAccountService {
@@ -19,4 +20,6 @@ public interface BankAccountService {
     public void deleteBankAccount(String accountnumber);
 
     BankAccountResponse getBankAccountByAccountNumber(String accountNumber);
+
+    BankAccountResponse getAccountBalance(String accountNumber);
 }
